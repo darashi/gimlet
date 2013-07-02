@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Gimlet::VERSION
   spec.authors       = ["Yoji SHIDARA"]
   spec.email         = ["dara@shidara.net"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Text-oriented document database}
+  spec.summary       = %q{Text-orianted document database}
   spec.homepage      = ""
   spec.license       = "MIT"
 
