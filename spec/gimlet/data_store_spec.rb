@@ -24,4 +24,19 @@ describe Gimlet::DataStore do
       expect(subject[:hello][:message]).to eq('Hello world')
     end
   end
+
+  describe 'deep' do
+    subject { Gimlet::DataStore.new(fixture_path('deep')) }
+    it do
+      expect(subject.to_h).to eq({'hello' => {'message' => {'en' => 'Hello world'}}})
+    end
+
+    it do
+      expect(subject.hello.message.en).to eq('Hello world')
+    end
+
+    it do
+      expect(subject[:hello][:message][:en]).to eq('Hello world')
+    end
+  end
 end
