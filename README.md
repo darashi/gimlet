@@ -1,6 +1,6 @@
 # Gimlet
 
-TODO: Write a gem description
+Document oriented, Text-based and Read-only data storage
 
 ## Installation
 
