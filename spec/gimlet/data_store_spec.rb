@@ -1,5 +1,4 @@
 require_relative '../spec_helper'
-require_relative '../../lib/gimlet'
 
 describe Gimlet::DataStore do
   describe 'empty' do
