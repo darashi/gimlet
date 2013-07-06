@@ -1,4 +1,5 @@
 require 'yaml'
+require 'thor'
 
 module Gimlet
   class DataStore
@@ -12,11 +13,19 @@ module Gimlet
       Dir[File.join(@data_directory, '**', '*.yaml')].each do |path|
         extension = File.extname(path)
         basename = File.basename(path, extension)
-        @local_data[basename] = YAML.load_file(path)
+        @local_data[basename] = ::Gimlet::Util.wrap_hash(YAML.load_file(path))
       end
     end
 
-    def data
+    def method_missing(path)
+      if data = @local_data[path.to_s]
+        return data
+      end
+
+      super
+    end
+
+    def to_h
       @local_data
     end
   end

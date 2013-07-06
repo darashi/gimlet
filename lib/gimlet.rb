@@ -1,5 +1,6 @@
 require "gimlet/version"
 
 module Gimlet
-  # Your code goes here...
+  autoload :DataStore, 'gimlet/data_store'
+  autoload :Util,      'gimlet/util'
 end

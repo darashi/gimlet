@@ -1,12 +1,12 @@
 require_relative '../spec_helper'
-require_relative '../../lib/gimlet/data_store'
+require_relative '../../lib/gimlet'
 
 describe Gimlet::DataStore do
   describe 'empty' do
     subject { Gimlet::DataStore.new(fixture_path('empty')) }
 
     it do
-      expect(subject.data).to eq({})
+      expect(subject.to_h).to eq({})
     end
   end
 
@@ -14,7 +14,11 @@ describe Gimlet::DataStore do
     subject { Gimlet::DataStore.new(fixture_path('yaml')) }
 
     it do
-      expect(subject.data).to eq({'hello' => {'message' => 'Hello world'}})
+      expect(subject.to_h).to eq({'hello' => {'message' => 'Hello world'}})
+    end
+
+    it do
+      expect(subject.hello.message).to eq('Hello world')
     end
   end
 end
