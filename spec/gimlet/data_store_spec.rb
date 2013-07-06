@@ -19,5 +19,9 @@ describe Gimlet::DataStore do
     it do
       expect(subject.hello.message).to eq('Hello world')
     end
+
+    it do
+      expect(subject[:hello][:message]).to eq('Hello world')
+    end
   end
 end

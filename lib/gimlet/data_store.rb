@@ -1,11 +1,14 @@
 require 'yaml'
 require 'thor'
+require 'forwardable'
 
 module Gimlet
   class DataStore
+    extend Forwardable
+
     def initialize(data_directory)
       @data_directory = data_directory
-      @local_data = {}
+      @local_data = ::Gimlet::Util.wrap_hash({})
       load_all!
     end
 
@@ -17,16 +20,8 @@ module Gimlet
       end
     end
 
-    def method_missing(path)
-      if data = @local_data[path.to_s]
-        return data
-      end
-
-      super
-    end
-
-    def to_h
-      @local_data
-    end
+    def_delegator :@local_data, :[]
+    def_delegator :@local_data, :method_missing
+    def_delegator :@local_data, :to_h
   end
 end
