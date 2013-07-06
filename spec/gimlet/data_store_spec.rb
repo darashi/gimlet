@@ -39,4 +39,16 @@ describe Gimlet::DataStore do
       expect(subject[:hello][:message][:en]).to eq('Hello world')
     end
   end
+
+  describe 'array' do
+    subject { Gimlet::DataStore.new(fixture_path('array')) }
+
+    it do
+      expect(subject.to_h).to eq('hello' => ['Hello world', 'こんにちは世界'])
+    end
+
+    it do
+      expect(subject.hello.first).to eq('Hello world')
+    end
+  end
 end
