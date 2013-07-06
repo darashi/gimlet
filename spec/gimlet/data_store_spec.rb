@@ -51,4 +51,16 @@ describe Gimlet::DataStore do
       expect(subject.hello.first).to eq('Hello world')
     end
   end
+
+  describe 'directries' do
+    subject { Gimlet::DataStore.new(fixture_path('directories')) }
+
+    it do
+      expect(subject.to_h).to eq({'hello' => {'world' => {'message' => 'Hello world'}}})
+    end
+
+    it do
+      expect(subject.hello.world.message).to eq('Hello world')
+    end
+  end
 end
