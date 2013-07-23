@@ -32,8 +32,6 @@ module Gimlet
       end
     end
 
-    def_delegator :@local_data, :[]
-    def_delegator :@local_data, :method_missing
-    def_delegator :@local_data, :to_h
+    def_delegators :@local_data, :[], :method_missing, :to_h
   end
 end
