@@ -63,4 +63,12 @@ describe Gimlet::DataStore do
       expect(subject.hello.world.message).to eq('Hello world')
     end
   end
+
+  describe 'suffix' do
+    subject { Gimlet::DataStore.new(fixture_path('suffix')) }
+
+    it do
+      expect(subject.to_h).to eq({'yaml' => {'name' => 'yaml'}, 'yml' => {'name' => 'yml'}})
+    end
+  end
 end

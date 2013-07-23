@@ -14,7 +14,7 @@ module Gimlet
     end
 
     def load_all!
-      Pathname.glob(@data_directory + '**/*.yaml').each do |path|
+      Pathname.glob(@data_directory + '**/*.{yaml,yml}').each do |path|
         extension = path.extname
         basename = path.basename(extension)
 
