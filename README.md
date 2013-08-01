@@ -1,6 +1,10 @@
 # Gimlet
 
-Document oriented, Text-based and Read-only data storage
+Document-oriented, Text-based and Read-only data storage
+
+Gimlet is strongly inspired by [Local Data](http://middlemanapp.com/advanced/local-data/) of [Middleman](http://middlemanapp.com/). It is so handy, but it is built in middleman.
+
+Gimlet let us to use this feature for general purposes that do not fit middleman with.
 
 ## Installation
 
@@ -18,7 +22,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Put `data/people/homuhomu.yaml`,
+
+    ---
+    first_name: Akemi
+    last_name: Homura
+
+Then you can access the data:
+
+    require 'gimlet'
+
+    DB = Gimlet::DataStore.new('data')
+
+    p data.to_h                 #=> {"homuhomu"=>{"first_name"=>"Akemi", "last_name"=>"Homura"}}
+    p data.homuhomu             #=> {"first_name"=>"Akemi", "last_name"=>"Homura"}
+    p data[:homuhomu].last_name #=> "Homura"
+
 
 ## Contributing
 
