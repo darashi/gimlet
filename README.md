@@ -32,7 +32,7 @@ Then you can access the data:
 
     require 'gimlet'
 
-    DB = Gimlet::DataStore.new('data')
+    data = Gimlet::DataStore.new('data')
 
     p data.to_h                 #=> {"people"=>{"homuhomu"=>{"first_name"=>"Akemi", "last_name"=>"Homura"}}}
     p data.people.homuhomu      #=> {"first_name"=>"Akemi", "last_name"=>"Homura"}
