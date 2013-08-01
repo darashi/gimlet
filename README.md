@@ -34,9 +34,9 @@ Then you can access the data:
 
     DB = Gimlet::DataStore.new('data')
 
-    p data.to_h                 #=> {"homuhomu"=>{"first_name"=>"Akemi", "last_name"=>"Homura"}}
-    p data.homuhomu             #=> {"first_name"=>"Akemi", "last_name"=>"Homura"}
-    p data[:homuhomu].last_name #=> "Homura"
+    p data.to_h                 #=> {"people"=>{"homuhomu"=>{"first_name"=>"Akemi", "last_name"=>"Homura"}}}
+    p data.people.homuhomu      #=> {"first_name"=>"Akemi", "last_name"=>"Homura"}
+    p data.people[:homuhomu].last_name #=> "Homura"
 
 
 ## Contributing
