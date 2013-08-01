@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Gimlet::VERSION
   spec.authors       = ["Yoji SHIDARA"]
   spec.email         = ["dara@shidara.net"]
-  spec.description   = %q{Text-oriented document database}
-  spec.summary       = %q{Text-orianted document database}
-  spec.homepage      = ""
+  spec.description   = %q{Document-oriented, Text-based and Read-only data storage}
+  spec.summary       = %q{Document-oriented, Text-based and Read-only data storage}
+  spec.homepage      = "https://github.com/darashi/gimlet"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
