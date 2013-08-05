@@ -25,8 +25,8 @@ Or install it yourself as:
 Put `data/people/homuhomu.yaml`,
 
     ---
-    first_name: Akemi
-    last_name: Homura
+    first_name: Homura
+    last_name: Akemi
 
 Then you can access the data:
 
@@ -34,9 +34,9 @@ Then you can access the data:
 
     data = Gimlet::DataStore.new('data')
 
-    p data.to_h                 #=> {"people"=>{"homuhomu"=>{"first_name"=>"Akemi", "last_name"=>"Homura"}}}
-    p data.people.homuhomu      #=> {"first_name"=>"Akemi", "last_name"=>"Homura"}
-    p data.people[:homuhomu].last_name #=> "Homura"
+    p data.to_h                 #=> {"people"=>{"homuhomu"=>{"first_name"=>"Homura", "last_name"=>"Akemi"}}}
+    p data.people.homuhomu      #=> {"first_name"=>"Homura", "last_name"=>"Akemi"}
+    p data.people[:homuhomu].first_name #=> "Homura"
 
 
 ## Contributing
