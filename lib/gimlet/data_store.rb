@@ -52,7 +52,7 @@ module Gimlet
         end
       end
 
-      raise SourceNotFound, 'No such file or directory - %s' % @source_path
+      raise SourceNotFound, 'No such file - %s' % @source_path
     end
 
     def_delegators :@local_data, :[], :method_missing, :to_h, :each
