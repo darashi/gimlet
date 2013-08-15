@@ -7,14 +7,14 @@ module Gimlet
   class DataStore
     extend Forwardable
 
-    def initialize(data_directory)
-      @data_directory = Pathname(data_directory)
+    def initialize(source_path)
+      @source_path = Pathname(source_path)
       @local_data = ::Gimlet::Util.recursively_enhance({})
       load_all!
     end
 
     def load_all!
-      if File.directory?(@data_directory)
+      if File.directory?(@source_path)
         load_from_directory!
       else
         load_from_file!
@@ -22,11 +22,11 @@ module Gimlet
     end
 
     def load_from_directory!
-      Pathname.glob(@data_directory + '**/*.{yaml,yml}').each do |path|
+      Pathname.glob(@source_path + '**/*.{yaml,yml}').each do |path|
         extension = path.extname
         basename = path.basename(extension)
 
-        parts = path.relative_path_from(@data_directory).split.map(&:to_s)[0..-1]
+        parts = path.relative_path_from(@source_path).split.map(&:to_s)[0..-1]
         parts.delete('.')
         parts.pop
 
@@ -42,7 +42,7 @@ module Gimlet
 
     def load_from_file!
       %w(yaml yml).each do |ext|
-        path = @data_directory.sub_ext(".#{ext}")
+        path = @source_path.sub_ext(".#{ext}")
 
         if path.exist?
           @local_data = ::Gimlet::Util.recursively_enhance(YAML.load_file(path))
