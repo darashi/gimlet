@@ -79,4 +79,12 @@ describe Gimlet::DataStore do
       expect(subject.to_h).to eq({'message' => 'Hello world'})
     end
   end
+
+  describe 'not found' do
+    subject { Gimlet::DataStore.new('NOT_FOUND') }
+
+    it do
+      expect(->{ subject }).to raise_error(Gimlet::DataStore::SourceNotFound)
+    end
+  end
 end

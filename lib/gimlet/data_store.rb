@@ -7,6 +7,8 @@ module Gimlet
   class DataStore
     extend Forwardable
 
+    class SourceNotFound < StandardError; end
+
     def initialize(source_path)
       @source_path = Pathname(source_path)
       @local_data = ::Gimlet::Util.recursively_enhance({})
@@ -46,9 +48,11 @@ module Gimlet
 
         if path.exist?
           @local_data = ::Gimlet::Util.recursively_enhance(YAML.load_file(path))
-          break
+          return
         end
       end
+
+      raise SourceNotFound, 'No such file or directory - %s' % @source_path
     end
 
     def_delegators :@local_data, :[], :method_missing, :to_h, :each
