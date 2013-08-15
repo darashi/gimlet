@@ -40,12 +40,16 @@ module Gimlet
           current = current[part]
         end
 
-        current[basename.to_s] = ::Gimlet::Util.recursively_enhance(YAML.load_file(path))
+        current[basename.to_s] = load_from_file(path)
       end
     end
 
     def load_from_file!
-      @local_data = ::Gimlet::Util.recursively_enhance(YAML.load_file(@source_path))
+      @local_data = load_from_file(@source_path)
+    end
+
+    def load_from_file(path)
+      ::Gimlet::Util.recursively_enhance(YAML.load_file(path))
     end
 
     def_delegators :@local_data, :[], :method_missing, :to_h, :each
