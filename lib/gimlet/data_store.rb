@@ -42,11 +42,14 @@ module Gimlet
       end
     end
 
-    def load_from_file!
-      paths_extension_expanded = ['', '.yaml', '.yml'].map do |extension|
+    def expand_paths(path)
+      ['', '.yaml', '.yml'].map do |extension|
         @source_path.sub(/$/, extension)
       end
+    end
 
+    def load_from_file!
+      paths_extension_expanded = expand_paths(path)
       path = paths_extension_expanded.find {|candidate| candidate.exist?}
       unless path
         raise SourceNotFound, 'No such file - %s' % paths_extension_expanded.join(', ')
