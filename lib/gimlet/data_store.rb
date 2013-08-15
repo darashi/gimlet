@@ -16,10 +16,12 @@ module Gimlet
     end
 
     def load_all!
-      if File.directory?(@source_path)
+      if @source_path.directory?
         load_from_directory!
-      else
+      elsif @source_path.file?
         load_from_file!
+      else
+        raise SourceNotFound, 'No such file or directory - %s' % @source_path
       end
     end
 
@@ -38,24 +40,16 @@ module Gimlet
           current = current[part]
         end
 
-        current[basename.to_s] = ::Gimlet::Util.recursively_enhance(YAML.load_file(path))
-      end
-    end
-
-    def expand_paths(path)
-      ['', '.yaml', '.yml'].map do |extension|
-        @source_path.sub(/$/, extension)
+        current[basename.to_s] = load_from_file(path)
       end
     end
 
     def load_from_file!
-      paths_extension_expanded = expand_paths(path)
-      path = paths_extension_expanded.find {|candidate| candidate.exist?}
-      unless path
-        raise SourceNotFound, 'No such file - %s' % paths_extension_expanded.join(', ')
-      end
+      @local_data = load_from_file(@source_path)
+    end
 
-      @local_data = ::Gimlet::Util.recursively_enhance(YAML.load_file(path))
+    def load_from_file(path)
+      ::Gimlet::Util.recursively_enhance(YAML.load_file(path))
     end
 
     def_delegators :@local_data, :[], :method_missing, :to_h, :each

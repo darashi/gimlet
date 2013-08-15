@@ -73,7 +73,7 @@ describe Gimlet::DataStore do
   end
 
   describe 'filename' do
-    subject { Gimlet::DataStore.new(fixture_path('yaml/hello')) }
+    subject { Gimlet::DataStore.new(fixture_path('yaml/hello.yaml')) }
 
     it do
       expect(subject.to_h).to eq({'message' => 'Hello world'})
